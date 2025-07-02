@@ -1,0 +1,34 @@
+<view class="white-box">
+    <button bindtap="go_1" class="row" style="width: 100%;border-bottom: none;">
+        <view class="left">
+            <text class="text">车辆数据监控</text>
+        </view>
+        <view class="right">
+            <text>Go</text>
+        </view>
+    </button>
+</view>
+<view class="white-box">
+    <button bindtap="go_2" class="row" style="width: 100%;border-bottom: none;">
+        <view class="left">
+            <text class="text">违法数据监测</text>
+        </view>
+        <view class="right">
+            <text>Go</text>
+        </view>
+    </button>
+</view>
+<view class="white-box">
+    <button bindtap="go_3" class="row" style="width: 100%;border-bottom: none;">
+        <view class="left">
+            <text class="text">车流量监测</text>
+        </view>
+        <view class="right">
+            <text>Go</text>
+        </view>
+    </button>
+</view>
+<view class="copy">
+    <text>2025 © XM01</text>
+</view>
+ 

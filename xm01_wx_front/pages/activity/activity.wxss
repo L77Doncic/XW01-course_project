@@ -1,0 +1,293 @@
+.my-item{
+	border-bottom: 1rpx solid #ddd;
+	padding: 20rpx;
+	font-size: 32rpx;
+	background: #fff url('../../images/xiangyou1.png') no-repeat 98% 50% / auto 36rpx;
+}
+.my-item image{
+	width: 40rpx;
+	height: 40rpx;
+	margin-right: 20rpx;
+	vertical-align: -6rpx;
+}
+page {
+  background-color: #f1f1f1;
+}
+
+.level {
+  display: flex;
+  align-items: center;
+}
+
+/* 状态栏 */
+.bar-box {
+  background-color: #2979ff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  padding: 20rpx 0;
+}
+
+.bar {
+  width: 80%;
+  margin-right: 30%;
+  margin-top: 1.5%;
+  margin-left: 20rpx;
+}
+
+.bar-title {
+  margin-top: 1.5%;
+  margin-left: 20rpx;
+  text-align: center;
+  font-size: 34rpx;
+  color: white;
+}
+
+.top-head {
+width: 15%;
+  border-radius: 50%;
+  background-color: white;
+}
+
+.welcome {
+  display: flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  color: white;
+}
+
+.nick {
+  font-size: 32rpx;
+font-weight: bold;
+margin-bottom: -15rpx;
+}
+
+.acount {
+  font-size: 22rpx;
+  margin-top: 5rpx;
+}
+.avatar-wrapper .avatar {
+  margin: 0 auto;
+  text-align: center;
+}
+.head-box {
+  background-color: #F9AF55;
+  padding: 0 20rpx;
+}
+
+.head-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.set-center {
+  background-color: #19be6b;
+  color: white;
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  padding: 5rpx 20rpx;
+}
+
+.share-box {
+  justify-content: space-between;
+  margin-top: 8%;
+  background-color: rgb(65, 64, 64);
+
+  border-radius: 20rpx;
+  padding: 20rpx;
+}
+
+.money {
+  font-size: 30rpx;
+  color: rgb(248, 201, 70);
+}
+
+.money-text {
+  padding-left: 20rpx;
+}
+
+.share-text {
+  padding-top: 10rpx;
+  font-size: 24rpx;
+  color: rgba(248, 212, 112, 0.479);
+}
+
+.share-btn {
+  background-color: rgb(248, 201, 70);
+  color: rgb(54, 54, 54);
+  border-radius: 50rpx;
+  font-size: 26rpx;
+  padding: 5rpx 15rpx 8rpx 15rpx;
+}
+
+.sign-box {
+  margin: 0 20rpx;
+  padding: 30rpx 20rpx;
+  font-size: 30rpx;
+color: gray;
+text-align: center;
+  justify-content: space-around;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  background-color: white;
+}
+/* 二级菜单 */
+.tab-box {
+  margin: 20rpx;
+  background-color: white;
+  box-shadow: 0 0 5rpx 5rpx #f1f1f1;
+  padding: 30rpx 20rpx;
+  border-radius: 20rpx;
+}
+
+.tab-list {
+  flex: 1;
+  text-align: center;
+  color: gray;
+}
+
+.tab-img {
+  width: 50%;
+}
+
+.tab-text {
+  font-size: 30rpx;
+  margin: 5rpx 0;
+}
+
+.white-box {
+  background-color: white;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 36rpx 10rpx;
+  font-size: 30rpx;
+font-weight: inherit;
+height: 120rpx;
+  background-color: rgba(0, 0, 0, 0);
+  border-bottom: 1rpx solid #f1f1f1;
+}
+
+.row::after {
+  border: none;
+}
+
+.text {
+  margin-left: 15rpx;
+  color: #636262;
+}
+
+.left {
+  width: 90%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: rgb(59, 59, 59);
+}
+.left image{
+align-self: center;
+width: 35rpx;
+height: 35rpx;
+}
+
+.right {
+  width: 70%;
+  text-align: right;
+  color: rgb(148, 147, 147);
+}
+
+/* 商标 */
+.copy {
+  padding: 30rpx;
+  text-align: center;
+  color: #000000;
+}
+
+.copy text {
+  font-size: 25rpx;
+  color: gray
+}
+.openid-wrapper{
+  flex: 1;
+  display: flex;
+  align-items: center;
+justify-content: space-between;
+}
+.id-wrapper{
+  background-color: #9e9626;
+  color: #000000;
+  padding: 0rpx 10rpx;
+  margin-right: 10rpx;
+  border-radius: 8rpx;
+}
+.openid{
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+.copy{
+  color: #ffffff;
+}
+.pricetitle {
+  text-align: center;
+  padding: 20rpx;
+}
+
+.multi-tips{
+color: #999;
+font-size: 24rpx;
+text-align: center;
+position: relative; 
+}
+
+.pricelist {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20rpx;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+.white-box-head{
+  background-color: #f7982a;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+}
+
+.priceitem {
+  display: flex;
+  padding: 30rpx;
+  box-sizing: border-box;
+  border: 1px dashed #ececec;
+}
+
+.priceitem-logo {
+padding: 10rpx 0;
+width: 60rpx;
+height: 40rpx;
+}
+
+.price_t {
+position:relative;
+font-size: 28rpx;
+width: 40%;
+padding: 10rpx;
+text-align: left;
+}
+
+.price_p {
+position:relative; 
+width: 40%;
+padding: 10rpx;
+text-align: right;
+font-size: 28rpx;
+color: #999;
+}

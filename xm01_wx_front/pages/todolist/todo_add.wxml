@@ -1,0 +1,43 @@
+<view class="container container-gray">
+	<view class="group">
+		<view class="group-header">待办事项内容</view>
+		<view class="group-body">
+			<view class="input-list">
+				<view class="input-item">
+					<text class="input-item-label">待办名称</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{title}}" bindinput="inputtitle"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">待办内容</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{content}}" bindinput="inputcontent"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">截止时间</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{limittime}}" bindinput="inputlimittime"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">开始时间</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{begintime}}" bindinput="inputbegintime"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">创建人</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{creator}}" bindinput="inputcreator"></input>
+					</view>
+				</view>
+        
+			</view>
+		</view>
+	</view>
+  <view class="btn-submit">
+		<button class="btn-block btn-orange" bindtap="AddRecord" >添加</button>
+	</view>
+</view>

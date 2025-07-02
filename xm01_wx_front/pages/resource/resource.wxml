@@ -1,0 +1,6 @@
+<view class="container container-fill">
+<view class="spacer"></view> <!-- 用于增加间距的空视图 -->
+<button class='button' bind:tap="Go_todo">待办事项表<span></span></button>
+<view class="spacer"></view> <!-- 用于增加间距的空视图 -->
+<button class='button' bind:tap="Go_complaint">投诉与建议<span></span></button>
+</view>

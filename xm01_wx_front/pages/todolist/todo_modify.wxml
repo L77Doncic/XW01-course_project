@@ -1,0 +1,37 @@
+<view class="container container-gray">
+	<view class="group">
+		<view class="group-header">信息修改</view>
+		<view class="group-body">
+			<view class="input-list">
+				<view class="input-item">
+					<text class="input-item-label">待办名称</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入待办名称" value="{{title}}" bindinput="inputtitle"></input>
+					</view>
+				</view>
+				<view class="input-item">
+					<text class="input-item-label">待办内容</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入待办内容" value="{{content}}" bindinput="inputcontent"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">截止时间</text>
+					<view class="input-item-content">
+            <input type="text" placeholder="请输入截止时间" value="{{limittime}}" bindinput="inputlimittime"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">开始时间</text>
+					<view class="input-item-content">
+            <input type="text" placeholder="请输入开始时间" value="{{begintime}}" bindinput="inputbegintime"></input>
+					</view>
+				</view>
+				
+			</view>
+		</view>
+	</view>
+	<view class="btn-submit">
+		<button class="btn-block btn-orange" bindtap="applySubmit">提交</button>
+	</view>
+</view>

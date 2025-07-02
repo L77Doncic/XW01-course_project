@@ -1,0 +1,90 @@
+page{
+  background-image: url('https://i0.hdslb.com/bfs/new_dyn/9831908d3dcc398a28df78b50ab709fc3816626.png');
+}
+
+.container{
+  margin-top: 10px;
+}
+/*two*/
+.two{
+  background-color: rgb(255, 254, 254);
+  border-radius: 20rpx;
+  margin: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx;
+  opacity: 70%;
+}
+.two image{
+  width: 300rpx;
+  height: 300rpx;
+}
+.p{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/*three*/
+.three{
+  margin-top: 10rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10rpx;
+}
+.t{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+}
+.tt{
+  background-color: rgb(255, 255, 255);
+  border-radius: 20rpx;
+  padding: 35rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 82%;
+
+}
+.tt image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 10px;
+}
+.ttt{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.four{
+  background-color: rgb(255, 255, 255);
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  margin: 3px;
+  opacity: 87%;
+}
+.zhishu{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 13px;
+}
+.zhishu image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.time{
+  display: flex;
+  justify-content: center;
+}

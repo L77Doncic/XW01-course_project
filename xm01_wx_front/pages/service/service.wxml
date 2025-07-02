@@ -1,0 +1,38 @@
+<!-- 页面容器 -->
+<view class="container">
+  <!-- 搜索栏区域 - 当滚动高度>200时添加'tophide'类 -->
+  <view class="search-flex {{scrolltop>200?'tophide':''}}">
+    <!-- 搜索输入框 -->
+    <view class="search-bar">
+      <!-- 搜索输入框，绑定输入事件 -->
+      <input type="text" maxlength="50" placeholder="搜索待办事项" bindinput="inputSearch"></input>
+      <!-- 搜索按钮，当有输入内容时显示 -->
+      <button class="search-btn" bindtap="submitSearch" wx:if="{{showsearch}}">搜索</button>
+    </view>
+    <!-- 添加待办事项按钮 -->
+    <button class="add-btn" bindtap="addTodo">添加</button>
+  </view>
+
+  <!-- 待办事项列表区域 - 可滚动视图 -->
+  <scroll-view class="container-body" scroll-y="true" scroll-top="{{scrolltop}}" 
+               bindscroll="scrollHandle" lower-threshold="50" bindscrolltolower="scrollLoading">
+    <!-- 待办事项列表 -->
+    <view class="todo-list">
+      <!-- 单个待办事项项，循环渲染 -->
+      <view class="todo-item" wx:for="{{todolist}}" wx:key="id" data-index="{{index}}">
+        <!-- 完成状态复选框 -->
+        <checkbox checked="{{item.completed}}" bindtap="toggleComplete"></checkbox>
+        <!-- 待办事项标题，完成时添加'completed'类 -->
+        <text class="{{item.completed?'completed':''}}">{{item.title}}</text>
+        <!-- 删除按钮 -->
+        <button class="delete-btn" bindtap="deleteTodo" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+    
+    <!-- 加载更多提示 -->
+    <view class="load-more" wx:if="{{loading}}">加载中...</view>
+    
+    <!-- 返回顶部按钮，滚动高度>200时显示 -->
+    <view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+  </scroll-view>
+</view>

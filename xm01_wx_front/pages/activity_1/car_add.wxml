@@ -1,0 +1,43 @@
+<view class="container container-gray">
+	<view class="group">
+		<view class="group-header">车辆信息</view>
+		<view class="group-body">
+			<view class="input-list">
+				<view class="input-item">
+					<text class="input-item-label">车牌号</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{carnumber}}" bindinput="inputcarnumber"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">类型</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{type}}" bindinput="inputtype"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">违章</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{traffic_type}}" bindinput="inputtraffic_type"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">时间</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{time}}" bindinput="inputtime"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">速度</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入" value="{{speed}}" bindinput="inputspeed"></input>
+					</view>
+				</view>
+        
+			</view>
+		</view>
+	</view>
+  <view class="btn-submit">
+		<button class="btn-block btn-orange" bindtap="AddRecord" >添加</button>
+	</view>
+</view>

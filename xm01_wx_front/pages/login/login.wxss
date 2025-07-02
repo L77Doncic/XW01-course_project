@@ -1,0 +1,213 @@
+/* pages/login/login.wxss *//* 最大的父元素 */
+.v1{
+  display: block;
+  position:absolute;
+  width: 100%;
+  background-color: white;
+}
+/* 白色区域 */
+.v1 .v2{
+  position: relative;
+  margin-top: 150rpx;
+  left: 50rpx; 
+  width: 545rpx;
+  height: 600rpx;
+  background-color: white;
+  border-radius: 50rpx;
+}
+/* 白色区域内的登录文本 */
+.v1 .v2 .dltext{
+  margin-top: 50rpx;
+  position: absolute;
+  margin-left:50rpx;
+  width: 150rpx;
+  height: 100rpx;
+  font-size: 60rpx;
+  font-family: Helvetica;
+  color: #000000;
+  line-height: 100rpx;
+  letter-spacing: 2rpx;
+}
+/* 手机图片+输入框+下划线的父容器view */
+.v1 .v2 .phoneCs{
+  margin-top: 200rpx;
+  margin-left: 25rpx;
+  position: absolute;
+  display: flex;
+  width:600rpx ;
+  height: 90rpx ;
+  background-color: rgb(250, 248, 248);
+  border-radius: 50rpx;
+  
+}
+/* 手机图标 */
+.v1 .v2 .phoneCs .ph{
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  width: 45rpx;
+  height: 45rpx;
+}
+/* 手机号输入框 */
+.v1 .v2 .phoneCs input{
+  width: 400rpx;
+  font-size: 30rpx ;
+  margin-top: 25rpx;
+  margin-left: 30rpx;
+}
+/* 密码图标+输入框+小眼睛图标+下划线父容器view */
+.v1 .v2 .passwordCs{
+  margin-top: 350rpx;
+  margin-left: 25rpx;
+  position: absolute;
+  display: flex;
+  width:600rpx ;
+  height: 90rpx ;
+  border-radius: 50rpx;
+  background-color: rgb(250, 248, 248);
+
+}
+/* 密码图标 */
+.v1 .v2 .passwordCs .ps{
+  margin-top: 20rpx;
+  margin-left: 30rpx;
+  width: 50rpx;
+  height: 50rpx;
+}
+/* 眼睛 图标*/
+.v1 .v2 .passwordCs .eye{
+  margin-top: 10rpx;
+  margin-left: 65rpx;
+  width: 55rpx;
+  height: 55rpx;
+}
+/* 密码输入框 */
+.v1 .v2 .passwordCs input{
+  width: 400rpx;
+  font-size: 30rpx ;
+  margin-top: 25rpx;
+  margin-left: 30rpx;
+}
+/* 登录按钮容器view */
+.v1 .v2 .denglu{
+  width: 600rpx;
+  height: 80rpx;
+  position: absolute;
+  margin-top:515rpx;
+  margin-left:25rpx;
+  
+}
+/* 登录按钮 */
+.v1 .v2 .denglu button{
+  padding: 0rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  width: 100%;
+  height: 100%;
+  border-radius: 50rpx;
+  background-color: #f7982a;
+}
+.register{
+  color: rgb(84, 206, 247);
+}
+
+/* 二维码登录区域 */
+.qrcode-login {
+  margin-top: 80rpx;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 600rpx;
+  left: 0;
+}
+
+.wechat-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30rpx;
+  cursor: pointer;
+  width: 100%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+}
+
+.wechat-icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 16rpx;
+  vertical-align: middle;
+}
+
+.qrcode-text {
+  color: #07c160;
+  font-size: 28rpx;
+  vertical-align: middle;
+  line-height: 48rpx;
+}
+
+/* 二维码弹出层 */
+.qrcode-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.qrcode-container {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 30rpx;
+  width: 600rpx;
+  box-sizing: border-box;
+}
+
+.qrcode-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30rpx;
+}
+
+.qrcode-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-btn {
+  font-size: 48rpx;
+  color: #999;
+  cursor: pointer;
+  padding: 0 20rpx;
+}
+
+.qrcode-image {
+  width: 400rpx;
+  height: 400rpx;
+  margin: 0 auto;
+  display: block;
+}
+
+.qrcode-tip {
+  display: block;
+  color: #666;
+  font-size: 28rpx;
+  margin-top: 30rpx;
+  text-align: center;
+}
+
+.qrcode-refresh {
+  display: block;
+  color: #07c160;
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  text-align: center;
+  text-decoration: underline;
+  cursor: pointer;
+}

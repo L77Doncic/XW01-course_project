@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm01.weibo.mapper.Xm01WbhotMapper">
+    
+    <resultMap type="Xm01Wbhot" id="Xm01WbhotResult">
+        <result property="id"    column="id"    />
+        <result property="realpos"    column="realpos"    />
+        <result property="note"    column="note"    />
+        <result property="num"    column="num"    />
+        <result property="iconDesc"    column="icon_desc"    />
+
+    </resultMap>
+
+    <sql id="selectXm01WbhotVo">
+        select id, realpos,  note, num,icon_desc from xm01_wbhot
+    </sql>
+
+    <select id="selectXm01WbhotList" parameterType="Xm01Wbhot" resultMap="Xm01WbhotResult">
+        <include refid="selectXm01WbhotVo"/>
+        <where>  
+            <if test="realpos != null "> and realpos = #{realpos}</if>
+            <if test="note != null  and note != ''"> and note like concat('%', #{note}, '%')</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="iconDesc != null  and iconDesc != ''"> and icon_desc = #{iconDesc}</if>
+        </where>
+    </select>
+    
+    <select id="selectXm01WbhotById" parameterType="Long" resultMap="Xm01WbhotResult">
+        <include refid="selectXm01WbhotVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXm01Wbhot" parameterType="Xm01Wbhot" useGeneratedKeys="true" keyProperty="id">
+        insert into xm01_wbhot
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="realpos != null">realpos,</if>
+            <if test="note != null and note != ''">note,</if>
+            <if test="num != null">num,</if>
+           <if test="iconDesc != null">icon_desc</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="realpos != null">#{realpos},</if>
+            <if test="note != null and note != ''">#{note},</if>
+            <if test="num != null">#{num},</if>
+            <if test="iconDesc != null">#{iconDesc},</if>
+
+         </trim>
+    </insert>
+
+    <update id="updateXm01Wbhot" parameterType="Xm01Wbhot">
+        update xm01_wbhot
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="realpos != null">realpos = #{realpos},</if>
+            <if test="note != null and note != ''">note = #{note},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="iconDesc != null">icon_desc = #{iconDesc},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXm01WbhotById" parameterType="Long">
+        delete from xm01_wbhot where id = #{id}
+    </delete>
+
+    <delete id="deleteXm01WbhotByIds" parameterType="String">
+        delete from xm01_wbhot where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteXM01wbhotAll">
+        truncate table xm01_wbhot
+    </delete>
+
+</mapper>

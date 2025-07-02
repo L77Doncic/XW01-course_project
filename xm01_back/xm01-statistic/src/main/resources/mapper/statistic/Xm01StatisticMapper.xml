@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm01.statistic.mapper.Xm01StatisticMapper">
+    
+    <resultMap type="Xm01Statistic" id="Xm01StatisticResult">
+        <result property="statisticId"    column="statistic_id"    />
+        <result property="trafficFlow"    column="traffic_flow"    />
+        <result property="widX1"    column="wid_x1"    />
+        <result property="widY1"    column="wid_y1"    />
+        <result property="widX2"    column="wid_x2"    />
+        <result property="widY2"    column="wid_y2"    />
+        <result property="createTime"    column="create_time"    />
+    </resultMap>
+
+    <sql id="selectXm01StatisticVo">
+        select statistic_id, traffic_flow, wid_x1, wid_y1, wid_x2, wid_y2, create_time from xm01_statistic
+    </sql>
+
+    <select id="selectXm01StatisticList" parameterType="Xm01Statistic" resultMap="Xm01StatisticResult">
+        <include refid="selectXm01StatisticVo"/>
+        <where>  
+            <if test="trafficFlow != null "> and traffic_flow = #{trafficFlow}</if>
+        </where>
+    </select>
+    
+    <select id="selectXm01StatisticByStatisticId" parameterType="Long" resultMap="Xm01StatisticResult">
+        <include refid="selectXm01StatisticVo"/>
+        where statistic_id = #{statisticId}
+    </select>
+
+    <insert id="insertXm01Statistic" parameterType="Xm01Statistic" useGeneratedKeys="true" keyProperty="statisticId">
+        insert into xm01_statistic
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="trafficFlow != null">traffic_flow,</if>
+            <if test="widX1 != null">wid_x1,</if>
+            <if test="widY1 != null">wid_y1,</if>
+            <if test="widX2 != null">wid_x2,</if>
+            <if test="widY2 != null">wid_y2,</if>
+            <if test="createTime != null">create_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="trafficFlow != null">#{trafficFlow},</if>
+            <if test="widX1 != null">#{widX1},</if>
+            <if test="widY1 != null">#{widY1},</if>
+            <if test="widX2 != null">#{widX2},</if>
+            <if test="widY2 != null">#{widY2},</if>
+            <if test="createTime != null">#{createTime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXm01Statistic" parameterType="Xm01Statistic">
+        update xm01_statistic
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="trafficFlow != null">traffic_flow = #{trafficFlow},</if>
+            <if test="widX1 != null">wid_x1 = #{widX1},</if>
+            <if test="widY1 != null">wid_y1 = #{widY1},</if>
+            <if test="widX2 != null">wid_x2 = #{widX2},</if>
+            <if test="widY2 != null">wid_y2 = #{widY2},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+        </trim>
+        where statistic_id = #{statisticId}
+    </update>
+
+    <delete id="deleteXm01StatisticByStatisticId" parameterType="Long">
+        delete from xm01_statistic where statistic_id = #{statisticId}
+    </delete>
+
+    <delete id="deleteXm01StatisticByStatisticIds" parameterType="String">
+        delete from xm01_statistic where statistic_id in 
+        <foreach item="statisticId" collection="array" open="(" separator="," close=")">
+            #{statisticId}
+        </foreach>
+    </delete>
+</mapper>

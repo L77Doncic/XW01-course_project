@@ -1,0 +1,80 @@
+<view class="white-box-head">
+    <view class="user-info">
+        <image class="top-head" src="../../images/user.png" mode="widthFix"></image>
+        <view class="info-right">
+            <view class="welcome">
+                <view class="nick">{{nick_name}}</view>
+                <view class='openid-wrapper'>
+                    <view class="id-wrapper">ID</view>
+                    <view class="openid">{{user_ID}}</view>
+                    <view class="copy" bindtap="onCopy">复制</view>
+                </view>
+            </view>
+            <view class="set-center">管理员未认证</view>
+        </view>
+    </view>
+    <view class="share-box" bindtap="detailClick">
+        <view>
+            <view class="money">
+                <text>管理员！</text>
+                <text class="money-text"></text>
+            </view>
+            <view class="share-text">解锁更多可能！</view>
+        </view>
+        <view class="share-btn">成为管理员</view>
+    </view>
+</view>
+<!-- 二级菜单 -->
+<view class="white-box">
+    <button class="row" style="width: 100%;" bindtap="toedit">
+        <view class="left">
+            <image src="../../images/user_id.png"></image>
+            <text class="text">用户名称：123</text>
+        </view>
+        <view class="right"><text class="id">{{user_name}}</text></view>
+    </button>
+    <button class="row" style="width: 100%;" bindtap="tofabu">
+        <view class="left">
+            <image src="../../images/user_name.png"></image>
+            <text class="text">昵称：123</text>
+        </view>
+        <view class="right"><text class="name">{{nick_name}}</text></view>
+    </button>
+    <button class="row" style="width: 100%;" bindtap="tostar">
+        <view class="left">
+            <image src="../../images/user_email.png"></image>
+            <text class="text">用户邮箱：123@qq.com</text>
+        </view>
+        <view class="right"><text class="email">{{user_email}}</text></view>
+    </button>
+    <button class="row" style="width: 100%;" bindtap="toorder">
+        <view class="left">
+            <image src="../../images/user_level.png"></image>
+            <text class="text">用户电话：123</text>
+        </view>
+        <view style="margin-left: auto;color: rgb(148, 147, 147);"><text class="level">{{user_level}}</text></view>
+    </button>
+    <button class="row" style="width: 100%;" bindtap="onPriceOpen">
+        <view class="left">
+            <image src="../../images/user_time.png"></image>
+            <text class="text">创建时间：2025.06.09</text>
+        </view>
+        <view class="right"><text class="time">{{user_time}}</text></view>
+    </button>
+</view>
+<view class="white-box">
+    <button class="row" style="width: 100%;border-bottom: none;" bind:tap="Go_Modify">
+        <view class="left">
+            <text class="text">修改信息</text>
+        </view>
+    </button>
+    <button class="row" style="width: 100%;border-bottom: none;">
+        <view class="left">
+            <text class="text">当前版本</text>
+        </view>
+        <view style="text-align: center;">V1.0</view>
+    </button>
+</view>
+<view class="copy">
+    <text>2025 © XM01</text>
+</view>

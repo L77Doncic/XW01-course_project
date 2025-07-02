@@ -1,0 +1,102 @@
+<!--tianqi-->
+<view class="container">
+  <!-- 第一块 -->
+  <view class="one">
+  </view>
+
+  <!-- 第二块 -->
+  <view class="two">
+    <text>{{sheng}}-{{shi}}-{{qu}}</text>
+    <view class="detail">
+      <view class="p">
+        <text style="font-size: 100rpx;font-weight: 500;padding-right: 15rpx;color: rgb(0, 0, 0);">{{temp}}℃</text>
+        <text>{{tianqi}}</text>  
+      </view>
+      <view class="pp">
+        <text>{{fengxiang}}{{dengji}}级</text>
+        <text> | </text>
+        <text>湿度为{{humi}}%</text>
+      </view>
+    </view>
+    <image src="/images/tianqi/{{icon}}.svg" mode=""/>
+  </view>
+  <!-- 第三块 -->
+  <view class="three">
+    <!--第一行-->
+    <view class="t">
+      <view class="tt">
+      <image src="/images/jiangshuiliang.png" mode=""/>
+      <view class="ttt">
+        <text>降水量</text>
+        <text style="color:cornflowerblue;">{{jiangshuiliang}}mm</text>
+      </view>
+      </view>
+      <view class="tt">
+        <image src="/images/yunliang.png" mode=""/>
+      <view class="ttt">
+        <text>白云量</text>
+        <text style="color:cornflowerblue;">{{yunliang}}%</text>
+      </view>
+      </view>
+      <view class="tt">
+        <image src="/images/ziwaixian.png" mode=""/>
+      <view class="ttt">
+        <text>紫外线</text>
+        <text style="color:cornflowerblue;">{{jiance}}</text>
+      </view>
+      </view>
+    </view>
+    <!--第二行-->
+    <view class="t">
+    <view class="tt">
+      <image src="/images/daqiya.png" mode=""/>
+    <view class="ttt">
+    <text>大气压</text>
+     <text style="color:cornflowerblue;">{{pa}}pa</text>
+    </view>
+    </view>
+    <view class="tt">
+      <image src="/images/shushi.png" mode=""/>
+    <view class="ttt">
+    <text>舒适度</text>
+    <text style="color:cornflowerblue;">{{pm}}</text>
+    </view>
+    </view>
+    <view class="tt">
+      <image src="/images/see.png" mode=""/>
+    <view class="ttt">
+    <text>能见度</text>
+    <text style="color:cornflowerblue;">{{see}}KM</text>
+    </view>
+      
+      
+    </view>
+  </view>
+  </view>
+  <!--第四块-->
+  <view class="four">
+    <view class="zhishu">
+      <image src="/images/yundong.png" mode=""/>
+      <text style="font-weight: 800;font-size: 40rpx;">运动</text>
+      <text style="color: darkgoldenrod;">{{yundong}}</text>
+    </view>
+    <view class="zhishu">
+      <image src="/images/chuanyi.png" mode=""/>
+      <text style="font-weight: 800;font-size: 40rpx;">穿衣</text>
+      <text style="color: darkgoldenrod;">{{chuanyi}}</text>
+    </view>
+    <view class="zhishu">
+      <image src="/images/diaoyu.png" mode=""/>
+      <text style="font-weight: 800;font-size: 40rpx;">钓鱼</text>
+      <text style="color: darkgoldenrod;">{{diaoyu}}</text>
+    </view>
+    <view class="zhishu">
+      <image src="/images/xiche.png" mode=""/>
+      <text style="font-weight: 800;font-size: 40rpx;">洗车</text>
+      <text style="color: darkgoldenrod;">{{xiche}}</text>
+    </view>
+  </view>
+  <view class="time">
+      <text style="color:white;">更新时间：{{time}}</text>
+    </view>
+</view>

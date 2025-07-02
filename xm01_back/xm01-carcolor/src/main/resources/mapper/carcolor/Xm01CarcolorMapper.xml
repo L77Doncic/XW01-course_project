@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm01.carcolor.mapper.Xm01CarcolorMapper">
+    
+    <resultMap type="Xm01Carcolor" id="Xm01CarcolorResult">
+        <result property="id"    column="id"    />
+        <result property="plateNumber"    column="plate_number"    />
+        <result property="plateColor"    column="plate_color"    />
+    </resultMap>
+
+    <sql id="selectXm01CarcolorVo">
+        select id, plate_number, plate_color from xm01_carcolor
+    </sql>
+
+    <select id="selectXm01CarcolorList" parameterType="Xm01Carcolor" resultMap="Xm01CarcolorResult">
+        <include refid="selectXm01CarcolorVo"/>
+        <where>  
+            <if test="plateNumber != null  and plateNumber != ''"> and plate_number like concat('%', #{plateNumber}, '%')</if>
+            <if test="plateColor != null  and plateColor != ''"> and plate_color = #{plateColor}</if>
+        </where>
+    </select>
+    
+    <select id="selectXm01CarcolorById" parameterType="Long" resultMap="Xm01CarcolorResult">
+        <include refid="selectXm01CarcolorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXm01Carcolor" parameterType="Xm01Carcolor" useGeneratedKeys="true" keyProperty="id">
+        insert into xm01_carcolor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="plateNumber != null and plateNumber != ''">plate_number,</if>
+            <if test="plateColor != null and plateColor != ''">plate_color,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="plateNumber != null and plateNumber != ''">#{plateNumber},</if>
+            <if test="plateColor != null and plateColor != ''">#{plateColor},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXm01Carcolor" parameterType="Xm01Carcolor">
+        update xm01_carcolor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="plateNumber != null and plateNumber != ''">plate_number = #{plateNumber},</if>
+            <if test="plateColor != null and plateColor != ''">plate_color = #{plateColor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXm01CarcolorById" parameterType="Long">
+        delete from xm01_carcolor where id = #{id}
+    </delete>
+
+    <delete id="deleteXm01CarcolorByIds" parameterType="String">
+        delete from xm01_carcolor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

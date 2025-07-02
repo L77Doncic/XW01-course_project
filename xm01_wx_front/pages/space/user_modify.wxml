@@ -1,0 +1,52 @@
+<view class="container container-gray">
+	<view class="group">
+		<view class="group-body">
+			<view class="input-list">
+				<view class="input-item">
+					<text class="input-item-label">用户名称</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入用户名称" value="{{user_name}}" bindinput="inputusername"></input>
+					</view>
+				</view>
+				<view class="input-item">
+					<text class="input-item-label">用户昵称</text>
+					<view class="input-item-content">
+						<input type="text" placeholder="请输入用户昵称" value="{{nick_name}}" bindinput="inputnickname"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">用户邮箱</text>
+					<view class="input-item-content">
+            <input type="text" placeholder="请输入用户邮箱" value="{{email}}" bindinput="inputemail"></input>
+					</view>
+				</view>
+        <view class="input-item">
+					<text class="input-item-label">用户电话</text>
+					<view class="input-item-content">
+            <input type="text" placeholder="请输入用户电话" value="{{phonenumber}}" bindinput="inputphonenumber"></input>
+					</view>
+				</view>
+				<view class="input-item">
+					<text class="input-item-label">用户权限</text>
+					<picker class="input-item-content" bindchange="bindPickerChange" data-pickername="status" value="{{statusindex}}" range="{{statusarr}}" mode="selector">{{statusarr[statusindex]}}
+					</picker>
+				</view>
+				<view class="input-item input-item-full">
+				<text class="input-item-label">用户图标</text>
+					<view class="img-upload">
+						<view class="img-add"></view>
+						<view class="img-item">
+							<image src="/images/my_pic.png" mode="aspectFill"></image>
+						</view>
+						<view class="img-item">
+							<image src="/images/my_pic2.png" mode="aspectFill"></image>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="btn-submit">
+		<button class="btn-block btn-orange" bindtap="applySubmit">提交</button>
+	</view>
+</view>

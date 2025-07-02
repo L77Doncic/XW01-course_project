@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm01.cardata.mapper.Xm01CardataMapper">
+    
+    <resultMap type="Xm01Cardata" id="Xm01CardataResult">
+        <result property="id"    column="id"    />
+        <result property="carNumber"    column="car_number"    />
+        <result property="carType"    column="car_type"    />
+        <result property="trafficType"    column="traffic_type"    />
+        <result property="location"    column="location"    />
+        <result property="time"    column="time"    />
+        <result property="carSpeed"    column="car_speed"    />
+    </resultMap>
+
+    <sql id="selectXm01CardataVo">
+        select id, car_number, car_type, traffic_type, location, time, car_speed from xm01_cardata
+    </sql>
+
+    <select id="selectXm01CardataList" parameterType="Xm01Cardata" resultMap="Xm01CardataResult">
+        <include refid="selectXm01CardataVo"/>
+        <where>  
+            <if test="carNumber != null  and carNumber != ''"> and car_number = #{carNumber}</if>
+            <if test="carType != null  and carType != ''"> and car_type = #{carType}</if>
+            <if test="trafficType != null  and trafficType != ''"> and traffic_type = #{trafficType}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="carSpeed != null "> and car_speed = #{carSpeed}</if>
+        </where>
+    </select>
+    
+    <select id="selectXm01CardataById" parameterType="Long" resultMap="Xm01CardataResult">
+        <include refid="selectXm01CardataVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXm01Cardata" parameterType="Xm01Cardata" useGeneratedKeys="true" keyProperty="id">
+        insert into xm01_cardata
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carNumber != null">car_number,</if>
+            <if test="carType != null">car_type,</if>
+            <if test="trafficType != null">traffic_type,</if>
+            <if test="location != null">location,</if>
+            <if test="time != null">time,</if>
+            <if test="carSpeed != null">car_speed,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carNumber != null">#{carNumber},</if>
+            <if test="carType != null">#{carType},</if>
+            <if test="trafficType != null">#{trafficType},</if>
+            <if test="location != null">#{location},</if>
+            <if test="time != null">#{time},</if>
+            <if test="carSpeed != null">#{carSpeed},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXm01Cardata" parameterType="Xm01Cardata">
+        update xm01_cardata
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="carNumber != null">car_number = #{carNumber},</if>
+            <if test="carType != null">car_type = #{carType},</if>
+            <if test="trafficType != null">traffic_type = #{trafficType},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="carSpeed != null">car_speed = #{carSpeed},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXm01CardataById" parameterType="Long">
+        delete from xm01_cardata where id = #{id}
+    </delete>
+
+    <delete id="deleteXm01CardataByIds" parameterType="String">
+        delete from xm01_cardata where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

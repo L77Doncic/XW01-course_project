@@ -1,0 +1,84 @@
+.service-list{
+	padding: 0 20rpx;
+}
+.service-item{
+	display: flex;
+	padding: 20rpx 0; 
+	border-bottom: 1rpx solid #e8e8e8;
+}
+.service-img{
+	width: 150rpx;
+	height: 150rpx;
+}
+.service-item image{
+	width: 140rpx;
+	height: 140rpx;
+}
+.service-text{
+	flex: 1;
+	margin-left: 20rpx;
+	width: 100%;
+}
+.service-text .service-tite{
+	color: #333;
+	width: 100%;
+	font-size: 34rpx;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.service-tags{
+	margin: 6rpx 0;
+}
+.service-tags text{
+	padding: 6rpx 16rpx;
+	border: 1rpx solid #f7982a;
+	line-height: 1;
+	color: #f7982a;
+	font-size: 28rpx;
+	border-radius: 4rpx;
+	margin-right: 10rpx;
+	margin-bottom: 10rpx;
+	white-space: nowrap;
+}
+.service-city{
+	color: #666;
+}
+.shop-item {
+  display: flex;
+  /* 添加边框 */
+  padding: 20rpx;
+  border: 1rpx solid #efefef;
+  /* 圆角样式 */
+  border-radius: 10rpx;
+  margin: 20rpx;
+  /* 盒子阴影 */
+  box-shadow: 1rpx 1rpx 15rpx #ddd;
+}
+.left-thumb image {
+  width: 180rpx;
+  height: 180rpx;
+  display: block;
+  margin-right: 20rpx;
+}
+.car{
+  display: flex;
+  /* 纵向布局 */
+  flex-direction: row;
+  justify-content: end;
+}
+.car1{
+  width: 60px;
+}
+.right-info{
+  display: flex;
+  /* 纵向布局 */
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 24rpx;
+}
+.shop-title{
+  /* 文本加粗 */
+  font-weight: bold;
+  font-size: 20px;
+}

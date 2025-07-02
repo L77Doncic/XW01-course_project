@@ -1,0 +1,27 @@
+<map id="map" 
+  longitude="{{longitude}}" 
+  latitude="{{latitude}}" 
+  scale="{{scale}}" 
+  markers="{{markers}}" 
+  bindmarkertap="markertap"
+  bindregionchange="regionchange"
+  show-location 
+  style="width: 100%; height:{{height}}px;">
+
+  <!-- 信息展示面板 -->
+  <cover-view class="info-panel" wx:if="{{showDialog}}">
+    <cover-view class="info-content">
+      <cover-view class="info-item">设备ID: {{markerDeviceId}}</cover-view>
+      <cover-view class="info-item">经度: {{markerLongitude}}</cover-view>
+      <cover-view class="info-item">纬度: {{markerLatitude}}</cover-view>
+      <cover-view class="info-item">车流量: {{markernumber}}</cover-view>
+      <cover-view class="info-item">创建时间: {{markerTime}}</cover-view>
+      <cover-view class="close-btn" bindtap="toggleDialog">关闭</cover-view>
+    </cover-view>
+  </cover-view>
+
+  <!-- 查询按钮 -->
+  <cover-view class="query-btn" bindtap="onQueryTap">
+    车流量查询
+  </cover-view>
+</map>

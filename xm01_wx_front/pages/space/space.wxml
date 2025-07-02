@@ -1,0 +1,35 @@
+<view class="container">
+	<view class="search-flex {{scrolltop>200?'tophide':''}}">
+		<view class="search-bar">
+			<input type="text" maxlength="30" placeholder="请输入用户名查询" bindinput="inputSearch"></input>
+		</view>
+		<button class="search-extra-btn" bind:tap="submitSearch">查询</button>
+	</view>
+  <view class="action-bar">
+    <button class="add-btn" bind:tap="onAddReocrd">
+      <text>添加用户</text>
+    </button>
+  </view>
+	<scroll-view class="container-body" scroll-y="true" scroll-top="{{scrolltop}}" bindscroll="scrollHandle" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<navigator class="service-item" wx:for="{{devicelist}}" wx:key="{{item.device_id}}" >
+				<view class="service-img">
+					<image src="../../images/account2.png" mode="aspectFill"></image>
+				</view>
+				<view class="service-text">
+					<view class="service-tite">用户ID：{{item.user_id}}</view>
+          <text class="service-city">用户名：{{item.user_name}}</text>
+					<view class="service-tags"></view>
+					<text class="service-city">邮箱：{{item.email}}</text>
+          <view class="service-tags"></view>
+          <text class="service-city">电话：{{item.phonenumber}}</text>
+          <view class="service-tags">
+						<text class="delete-btn" bindtap="onDeleteRecord" data-itemId="{{item.user_id}}">删除</text>
+            <text class="edit-btn" bindtap="onModifyRecord" data-itemId="{{item.user_id}}" data-title="{{item.device_name}}">修改</text>
+					</view>
+				</view>
+			</navigator>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+	</scroll-view>
+</view>

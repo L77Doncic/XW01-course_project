@@ -1,0 +1,641 @@
+<template>
+  <div class="main">
+			<button id="button_static" @click="getLocation">获取地理位置</button>
+      <button id="button_static" @click="gotoweatherlist">查看统计信息</button>
+      <button id="button_static" @click="fetchapiWeatherData();fetchfutureData()">获取天气</button>
+      <div v-if="apiloading" class="loading">加载中ing</div>
+			<div v-else-if="apierror" class="error">{{ apierror }}</div>
+			<h1>城市天气</h1>
+      <div id="location">{{ locationText }}</div>
+			<div class="main-grid1">
+				<div class="main-grid1-pos">
+					<span> </span>
+				</div>
+				<h2>温度: <sup class="degree"><h v-if="apiweatherData">{{ apiweatherData.temp }}</h>°</sup><span>F</span></h2>
+				<p>{{city}}</p>
+				<div class="main-grid1-grids">
+					<div class="main-grid1-grid-left">
+						<p>
+            最高温
+            <sup class="degree">
+              <h v-if="fuweatherData">{{ fuweatherData[0].tempMax }}</h>°
+            </sup>
+            最低温
+            <sup class="degree">
+              <h v-if="fuweatherData">{{ fuweatherData[0].tempMin }}</h>°
+            </sup>
+          </p>
+						<h3>天气情况: <h v-if="apiweatherData">{{ apiweatherData.text }}</h></h3>
+					</div>
+					<div class="main-grid1-grid-right">
+						<p><span>时间</span>日期:<h v-if="apiweatherData">{{ apiweatherData.obsTime }}</h></p>
+					</div>
+					<div class="clear"> </div>
+				</div>
+			</div>
+      <div class="main-grid2">
+				<div class="main-grid2-left">
+        <img src="@/assets/weather_images/cloudy.png" alt=" " class="img-responsive" />
+        <p>
+          <h v-if="fuweatherData">{{ fuweatherData[1].fxDate }}</h>
+          <span>
+            <h v-if="fuweatherData">{{ fuweatherData[1].tempMax }}</h>
+            <sup class="degree">°</sup>
+            /
+            <h v-if="fuweatherData">{{ fuweatherData[1].tempMin }}</h>
+            <sup class="degree">°</sup>
+          </span>
+        </p>
+      </div>
+      <div class="main-grid2-left">
+        <img src="@/assets/weather_images/cloudy.png" alt=" " class="img-responsive" />
+        <p>
+          <h v-if="fuweatherData">{{ fuweatherData[2].fxDate }}</h>
+          <span>
+            <h v-if="fuweatherData">{{ fuweatherData[2].tempMax }}</h>
+            <sup class="degree">°</sup>
+            /
+            <h v-if="fuweatherData">{{ fuweatherData[2].tempMin }}</h>
+            <sup class="degree">°</sup>
+          </span>
+        </p>
+      </div>
+      <div class="main-grid2-left">
+        <img src="@/assets/weather_images/cloudy.png" alt=" " class="img-responsive" />
+        <p>
+          <h v-if="fuweatherData">{{ fuweatherData[3].fxDate }}</h>
+          <span>
+            <h v-if="fuweatherData">{{ fuweatherData[3].tempMax }}</h>
+            <sup class="degree">°</sup>
+            /
+            <h v-if="fuweatherData">{{ fuweatherData[3].tempMin }}</h>
+            <sup class="degree">°</sup>
+          </span>
+        </p>
+      </div>
+      <div class="main-grid2-left">
+        <img src="@/assets/weather_images/cloudy.png" alt=" " class="img-responsive" />
+        <p>
+          <h v-if="fuweatherData">{{ fuweatherData[4].fxDate }}</h>
+          <span>
+            <h v-if="fuweatherData">{{ fuweatherData[4].tempMax }}</h><sup class="degree">°</sup>
+            /
+            <h v-if="fuweatherData">{{ fuweatherData[4].tempMin }}</h>
+            <sup class="degree">°</sup>
+          </span>
+        </p>
+      </div>
+      <div class="clear"></div>
+			</div>
+			<div class="main-grid3" id="container">
+
+			</div>
+			<div class="footer">
+				<p>xm01</p>
+			</div>
+		</div>
+</template>
+
+<script setup >
+// import BMap from 'BMap'
+import { ref, onMounted } from "vue";
+import {
+  listWeather,
+  getWeather,
+  delWeather,
+  addWeather,
+  updateWeather
+} from "@/api/weather/weather";
+//新加的js
+const weatherList = ref([]);
+const total = ref(0);
+const loading = ref(true);
+const statsData = ref([]); //经处理得到的统计数据
+const currentData = ref([]); //经处理得到的今日天气数据
+const data = reactive({
+  form: {},
+  queryParams: {
+    pageNum: 1,
+    pageSize: 10,
+    city: null,
+    date: null,
+    weatherCondition: null
+  },
+  rules: {}
+});
+const { queryParams, form, rules } = toRefs(data);
+/** 查询天气列表 */
+
+getList();
+
+function getList() {
+  loading.value = true;
+  return listWeather(queryParams.value).then(response => {
+    weatherList.value = response.rows;
+    total.value = response.total;
+    loading.value = false;
+    console.log("[getList]weatherList=", weatherList.value);
+  });
+}
+//对数据处理得到用于显示今日天气的数组
+async function getcurrentData() {
+  await getList(); // 等待 getList 完成
+
+  let maxItem = null;
+
+  weatherList.value.forEach(item => {
+    console.log("[getcurrentData]item=", item);
+    if (!maxItem || item.id > maxItem.id) {
+      maxItem = item;
+    }
+  });
+  console.log("[getcurrentData]maxItem=", maxItem);
+
+  currentData.value = maxItem ? [maxItem] : [];
+
+  console.log("[getcurrentData]currentDataid=", currentData.value[0].id);
+  console.log("[getcurrentData]weatherList=", weatherList.value);
+  console.log(
+    "[getcurrentData]currentData是数组吗=",
+    Array.isArray(currentData.value)
+  );
+}
+
+onMounted(() => {
+  getcurrentData();
+});
+//原来的js
+const weatherData = ref({});
+function gotoweatherlist() {
+  window.location.href = "weatherlist";
+}
+
+
+
+const locationText = ref("获取城市名称...");
+let baiduMapLoaded = false;
+const city=ref('城市')
+
+// 动态加载百度地图API并确保其加载完成
+async function loadBaiduMapAPI() {
+  return new Promise((resolve, reject) => {
+    if (baiduMapLoaded) {
+      console.log('Baidu Map API is already loaded.');
+      resolve();
+      return;
+    }
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    // 直接加载最终的目标脚本
+    script.src = 'https://api.map.baidu.com/getscript?v=3.0&ak=r74kKgx8aafDdRAgaHfyesiV1tPCEkx2&services=&t=20241104145635';
+    script.onload = () => {
+      console.log('Script loaded successfully.');
+      if (window.BMap) {
+        baiduMapLoaded = true;
+        console.log('Baidu Map API loaded successfully.');
+        resolve();
+      } else {
+        console.error('Baidu Map API did not load correctly.');
+        reject(new Error('Baidu Map API did not load correctly.'));
+      }
+    };
+    script.onerror = (error) => {
+      console.error('Failed to load Baidu Map API:', error);
+      reject(new Error('Failed to load Baidu Map API'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+async function getLocation() {
+  try {
+    await loadBaiduMapAPI(); // 确保百度地图API加载完毕
+
+    if (!window.BMap) {
+      throw new Error('Baidu Map API did not load correctly.');
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      locationText.value = "Geolocation is not supported by this browser.";
+    }
+  } catch (error) {
+    console.error(error.message);
+    locationText.value = "加载百度地图API失败，请稍后再试。";
+  }
+}
+
+function showPosition(position) {
+  var latitude = position.coords.latitude;
+  var longitude = position.coords.longitude;
+
+  // 使用百度地图API进行反向地理编码
+  var geolocation = new BMap.Geocoder();
+  var map = new BMap.Map("container");
+  var point = new BMap.Point(longitude, latitude);
+  map.centerAndZoom(point,15);
+  map.enableScrollWheelZoom(true);
+  var marker = new BMap.Marker(point);
+  map.addOverlay(marker);
+  marker.addEventListener("click",function(){
+    alert("您点击了标注");
+  })
+
+  geolocation.getLocation(point, function(result) {
+    if (result) {
+      var cityName = result.addressComponents.city || '未知城市';
+      locationText.value = `您所在的城巿是: ${cityName}`;
+      city.value = result.addressComponents.city;
+    } else {
+      locationText.value = "无法获取城市信息";
+    }
+  });
+}
+
+function showError(error) {
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      locationText.value = "用户拒绝了地理定位请求。";
+      break;
+    case error.POSITION_UNAVAILABLE:
+      locationText.value = "位置信息不可用。";
+      break;
+    case error.TIMEOUT:
+      locationText.value = "请求用户地理位置超时。";
+      break;
+    case error.UNKNOWN_ERROR:
+      locationText.value = "发生未知错误。";
+      break;
+  }
+}
+
+async function fetchWeatherData() {
+  try {
+    const response = await fetch("getweather.php");
+    const data = await response.json();
+    weatherData.value = data;
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+  }
+}
+
+onMounted(() => {
+  fetchWeatherData();
+});
+
+
+//api获取实时天气数据填充页面
+const apiweatherData = ref(null);
+const apiloading  = ref(false);
+const apierror = ref(null);
+const locationId = '101270101';//chengdu
+const apiKey = 'ea56f52e8ea74274bbc3e4223f79e8b4'; 
+
+const apiUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationId}&key=${apiKey}&gzip=n`;
+
+async function fetchapiWeatherData() {
+  apiloading.value = true;
+  apierror.value = null;
+
+  try {
+    // 请求数据
+    const response = await fetch(apiUrl, {
+      method: 'GET',
+      headers: {
+        'Accept-Encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // 检查响应状态
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // 解析 JSON 数据
+    const data = await response.json();
+    console.log('Full API response:', data);
+    apiweatherData.value = data.now;
+    console.log('Weather data fetched', apiweatherData.value);
+  } catch (err) {
+    console.error('Error fetching weather data:', err);
+    apierror.value = '无法获取天气数据';
+  } finally {
+    apiloading.value = false;
+  }
+}
+
+
+//api获取实时天气数据填充页面
+const fuweatherData = ref(null);
+
+const fuapiUrl = `https://devapi.qweather.com/v7/weather/7d?location=${locationId}&key=${apiKey}&gzip=n`;
+
+async function fetchfutureData() {
+  // apiloading.value = true;
+  // apierror.value = null;
+
+  try {
+    // 请求数据
+    const response = await fetch(fuapiUrl, {
+      method: 'GET',
+      headers: {
+        'Accept-Encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
+      },
+    });
+
+    // 检查响应状态
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // 解析 JSON 数据
+    const data = await response.json();
+    console.log('Full API response:', data);
+    fuweatherData.value = data.daily;
+    console.log('futureWeather data fetched', fuweatherData.value);
+  } catch (err) {
+    console.error('Error fetching weather data:', err);
+    //apierror.value = '无法获取天气数据';
+  } finally {
+    //apiloading.value = false;
+  }
+}
+</script>
+
+<style scoped>
+.main {
+  background: url("@/assets/weather_images/banner.jpg") no-repeat 0px 0px;
+  background-size: cover;
+  min-height: 100%;
+  width: 100%;
+  font-family: "Nunito", sans-serif;
+}
+
+#button_location {
+  position: relative;
+  top: 5vh;
+  left: 140vh;
+  height: 40px;
+  width: 150px;
+  font-size: 20px;
+  font-family: "Microsoft YaHei UI";
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#button_static {
+  position: relative;
+  top: 10vh;
+  left: 121vh;
+  height: 40px;
+  width: 150px;
+  font-size: 20px;
+  font-family: "Microsoft YaHei UI";
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+#location{
+  margin-left: 55%;
+  margin-bottom: 2%;
+  font-size: 25px;
+}
+.main h1 {
+  text-transform: capitalize;
+  font-size: 50px;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 2em;
+  letter-spacing: 2px;
+}
+
+.main {
+  padding: 4em 0 3em;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.main-grid1 {
+  /* 控制中间白色 */
+  position: relative;
+  background: #fff;
+  width: 50%;
+  margin-left: 25%;
+}
+.main-grid3{
+	position: relative;
+	background: #fff;
+	width: 50%;
+	height: 400px;
+	margin-top: 50px;
+  margin-left: 25%;
+}
+
+.main-grid1-pos span {
+  background: url("@/assets/weather_images/1.png") no-repeat 0px 0px;
+  display: block;
+  height: 181px;
+  width: 200px;
+  position: absolute;
+  top: -32%;
+  left: -3%;
+}
+
+.main-grid1 h2 {
+  font-size: 4em;
+  color: #ffd61c;
+  margin: 0;
+  text-align: center;
+}
+
+.main-grid1 h2 span {
+  font-size: 0.5em;
+  color: #dbdada;
+}
+
+.main-grid1 p {
+  margin: 0;
+  color: #d1d1d1;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.main-grid1-grid-left {
+  float: left;
+}
+
+.main-grid1-grid-left p {
+  font-size: 1em;
+  color: #999;
+  margin: 0;
+  text-align: left;
+}
+
+.main-grid1-grid-left h3 {
+  color: #999;
+  font-size: 1em;
+  margin: 0;
+  text-align: left;
+}
+
+.main-grid1-grid-right {
+  float: right;
+}
+
+.main-grid1-grid-right p {
+  color: #999;
+  font-size: 1em;
+  margin: 0;
+  text-align: right;
+}
+
+.main-grid1-grid-right p span {
+  display: block;
+  font-size: 2.5em;
+}
+
+.main-grid1-grids {
+  padding: 0 2em 2em;
+}
+
+.main-grid2 {
+  padding: 1.5em;
+  background: #3891dd;
+  width: 50%;
+  margin-left: 25%;
+}
+
+.main-grid2-left {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
+
+.main-grid2-left p {
+  color: #fff;
+  font-size: 1em;
+  margin: 0;
+}
+
+.main-grid2-left p span {
+  display: block;
+}
+
+.footer {
+  padding: 4em 0 0;
+  text-align: center;
+}
+
+.footer p {
+  color: #fff;
+  font-size: 14px;
+  margin: 0;
+  line-height: 2.8em;
+}
+
+.footer p a {
+  text-decoration: none;
+  color: #fff;
+  padding: 0.3em 0 0;
+  border-top: 1px solid #fff;
+}
+
+.clear {
+  clear: both;
+}
+
+@media (max-width: 1440px) {
+  .main-grid1-pos span {
+    background-size: 80%;
+    top: -24%;
+  }
+}
+
+@media (max-width: 1280px) {
+  .main {
+    width: 40%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .main-grid1 h2 {
+    font-size: 3em;
+  }
+  .main {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .main {
+    width: 70%;
+  }
+}
+
+@media (max-width: 667px) {
+  .main-grid1 p {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 2em 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .main {
+    width: 90%;
+  }
+  .main-grid1-pos span {
+    background-size: 67%;
+    top: -27%;
+  }
+  .main-grid1 h2 {
+    font-size: 2.7em;
+  }
+  .main-grid1-grid-right p span {
+    font-size: 2em;
+  }
+  .main-grid1 p {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 384px) {
+  .main h1 {
+    font-size: 1.5em;
+  }
+}
+
+@media (max-width: 320px) {
+  .main-grid1-pos span {
+    background-size: 95%;
+    top: -18%;
+    height: 100px;
+    width: 100px;
+  }
+  .main-grid1-grid-left,
+  .main-grid1-grid-right {
+    float: none;
+  }
+  .main {
+    padding: 2em 0 2em;
+  }
+  .main-grid1 h2 {
+    font-size: 2em;
+  }
+  .main-grid2-left {
+    width: 50%;
+  }
+  .footer {
+    padding: 1em 0 0;
+  }
+  .footer p {
+    font-size: 13px;
+  }
+}
+</style>

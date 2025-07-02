@@ -1,0 +1,88 @@
+# 数据源配置
+spring:
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        druid:
+            # 主库数据源
+            master:
+                url: jdbc:mysql://www.ylxteach.net:3366/wtqjsz2025?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=true&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+                username: Administrator
+                password: XWClassroom20202023
+#                url: jdbc:mysql://localhost:3306/xm01_ruoyi?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+#
+#                username: java
+#                password: 123456
+            # 从库数据源
+            slave:
+                # 从数据源开关/默认关闭
+                enabled: false
+                url: 
+                username: 
+                password: 
+            # 初始连接数
+            initialSize: 5
+            # 最小连接池数量
+            minIdle: 10
+            # 最大连接池数量
+            maxActive: 20
+            # 配置获取连接等待超时的时间
+            maxWait: 60000
+            # 配置连接超时时间
+            connectTimeout: 30000
+            # 配置网络超时时间
+            socketTimeout: 60000
+            # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+            timeBetweenEvictionRunsMillis: 60000
+            # 配置一个连接在池中最小生存的时间，单位是毫秒
+            minEvictableIdleTimeMillis: 300000
+            # 配置一个连接在池中最大生存的时间，单位是毫秒
+            maxEvictableIdleTimeMillis: 900000
+            # 配置检测连接是否有效
+            validationQuery: SELECT 1 FROM DUAL
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            webStatFilter: 
+                enabled: true
+            statViewServlet:
+                enabled: true
+                # 设置白名单，不填则允许所有访问
+                allow:
+                url-pattern: /druid/*
+                # 控制台管理用户名和密码
+                login-username: ruoyi
+                login-password: 123456
+            filter:
+                stat:
+                    enabled: true
+                    # 慢SQL记录
+                    log-slow-sql: true
+                    slow-sql-millis: 1000
+                    merge-sql: true
+                wall:
+                    config:
+                        multi-statement-allow: true
+    #邮件配置
+    mail:
+        # from 要和 username 一致, 否则报错
+        from: 1804037445@qq.com
+        # 邮件服务地址
+        host: smtp.qq.com
+        # 用户名
+        username: 1804037445@qq.com
+        # 授权码 (设置 - 账户 - POP3/SMTP服务)
+        password: xllftzofpgfzdaaa
+        # QQ邮箱加密端口，不同邮箱的端口不一样
+        port: 465
+        properties:
+            mail:
+                smtp:
+                    socketFactory:
+                        class: javax.net.ssl.SSLSocketFactory
+                    ssl:
+                        trust: smtp.qq.com
+                    auth: true
+                    starttls:
+                        enable: true
+                        required: true

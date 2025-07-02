@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xm01.system.mapper.Xm01WeatherMapper">
+    
+    <resultMap type="Xm01Weather" id="Xm01WeatherResult">
+        <result property="id"    column="id"    />
+        <result property="city"    column="city"    />
+        <result property="obsTime"    column="obs_time"    />
+        <result property="currentTemp"    column="current_temp"    />
+        <result property="tempMax"    column="temp_max"    />
+        <result property="tempMin"    column="temp_min"    />
+        <result property="currentWeatherText"    column="current_weather_text"    />
+        <result property="day1FxDate"    column="day1_fx_date"    />
+        <result property="day1TempMax"    column="day1_temp_max"    />
+        <result property="day1TempMin"    column="day1_temp_min"    />
+        <result property="day2FxDate"    column="day2_fx_date"    />
+        <result property="day2TempMax"    column="day2_temp_max"    />
+        <result property="day2TempMin"    column="day2_temp_min"    />
+        <result property="day3FxDate"    column="day3_fx_date"    />
+        <result property="day3TempMax"    column="day3_temp_max"    />
+        <result property="day3TempMin"    column="day3_temp_min"    />
+        <result property="day4FxDate"    column="day4_fx_date"    />
+        <result property="day4TempMax"    column="day4_temp_max"    />
+        <result property="day4TempMin"    column="day4_temp_min"    />
+        <result property="createdAt"    column="created_at"    />
+    </resultMap>
+
+    <sql id="selectXm01WeatherVo">
+        select id, city, obs_time, current_temp, temp_max, temp_min, current_weather_text, day1_fx_date, day1_temp_max, day1_temp_min, day2_fx_date, day2_temp_max, day2_temp_min, day3_fx_date, day3_temp_max, day3_temp_min, day4_fx_date, day4_temp_max, day4_temp_min, created_at from xm01_weather
+    </sql>
+
+    <select id="selectXm01WeatherList" parameterType="Xm01Weather" resultMap="Xm01WeatherResult">
+        <include refid="selectXm01WeatherVo"/>
+        <where>  
+            <if test="city != null  and city != ''"> and city = #{city}</if>
+        </where>
+    </select>
+    
+    <select id="selectXm01WeatherById" parameterType="Long" resultMap="Xm01WeatherResult">
+        <include refid="selectXm01WeatherVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXm01Weather" parameterType="Xm01Weather" useGeneratedKeys="true" keyProperty="id">
+        insert into xm01_weather
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="city != null and city != ''">city,</if>
+            <if test="obsTime != null">obs_time,</if>
+            <if test="currentTemp != null">current_temp,</if>
+            <if test="tempMax != null">temp_max,</if>
+            <if test="tempMin != null">temp_min,</if>
+            <if test="currentWeatherText != null">current_weather_text,</if>
+            <if test="day1FxDate != null">day1_fx_date,</if>
+            <if test="day1TempMax != null">day1_temp_max,</if>
+            <if test="day1TempMin != null">day1_temp_min,</if>
+            <if test="day2FxDate != null">day2_fx_date,</if>
+            <if test="day2TempMax != null">day2_temp_max,</if>
+            <if test="day2TempMin != null">day2_temp_min,</if>
+            <if test="day3FxDate != null">day3_fx_date,</if>
+            <if test="day3TempMax != null">day3_temp_max,</if>
+            <if test="day3TempMin != null">day3_temp_min,</if>
+            <if test="day4FxDate != null">day4_fx_date,</if>
+            <if test="day4TempMax != null">day4_temp_max,</if>
+            <if test="day4TempMin != null">day4_temp_min,</if>
+            <if test="createdAt != null">created_at,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="city != null and city != ''">#{city},</if>
+            <if test="obsTime != null">#{obsTime},</if>
+            <if test="currentTemp != null">#{currentTemp},</if>
+            <if test="tempMax != null">#{tempMax},</if>
+            <if test="tempMin != null">#{tempMin},</if>
+            <if test="currentWeatherText != null">#{currentWeatherText},</if>
+            <if test="day1FxDate != null">#{day1FxDate},</if>
+            <if test="day1TempMax != null">#{day1TempMax},</if>
+            <if test="day1TempMin != null">#{day1TempMin},</if>
+            <if test="day2FxDate != null">#{day2FxDate},</if>
+            <if test="day2TempMax != null">#{day2TempMax},</if>
+            <if test="day2TempMin != null">#{day2TempMin},</if>
+            <if test="day3FxDate != null">#{day3FxDate},</if>
+            <if test="day3TempMax != null">#{day3TempMax},</if>
+            <if test="day3TempMin != null">#{day3TempMin},</if>
+            <if test="day4FxDate != null">#{day4FxDate},</if>
+            <if test="day4TempMax != null">#{day4TempMax},</if>
+            <if test="day4TempMin != null">#{day4TempMin},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+         </trim>
+    </insert>
+
+    <update id="updateXm01Weather" parameterType="Xm01Weather">
+        update xm01_weather
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="city != null and city != ''">city = #{city},</if>
+            <if test="obsTime != null">obs_time = #{obsTime},</if>
+            <if test="currentTemp != null">current_temp = #{currentTemp},</if>
+            <if test="tempMax != null">temp_max = #{tempMax},</if>
+            <if test="tempMin != null">temp_min = #{tempMin},</if>
+            <if test="currentWeatherText != null">current_weather_text = #{currentWeatherText},</if>
+            <if test="day1FxDate != null">day1_fx_date = #{day1FxDate},</if>
+            <if test="day1TempMax != null">day1_temp_max = #{day1TempMax},</if>
+            <if test="day1TempMin != null">day1_temp_min = #{day1TempMin},</if>
+            <if test="day2FxDate != null">day2_fx_date = #{day2FxDate},</if>
+            <if test="day2TempMax != null">day2_temp_max = #{day2TempMax},</if>
+            <if test="day2TempMin != null">day2_temp_min = #{day2TempMin},</if>
+            <if test="day3FxDate != null">day3_fx_date = #{day3FxDate},</if>
+            <if test="day3TempMax != null">day3_temp_max = #{day3TempMax},</if>
+            <if test="day3TempMin != null">day3_temp_min = #{day3TempMin},</if>
+            <if test="day4FxDate != null">day4_fx_date = #{day4FxDate},</if>
+            <if test="day4TempMax != null">day4_temp_max = #{day4TempMax},</if>
+            <if test="day4TempMin != null">day4_temp_min = #{day4TempMin},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXm01WeatherById" parameterType="Long">
+        delete from xm01_weather where id = #{id}
+    </delete>
+
+    <delete id="deleteXm01WeatherByIds" parameterType="String">
+        delete from xm01_weather where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

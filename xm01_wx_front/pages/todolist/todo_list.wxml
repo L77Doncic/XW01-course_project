@@ -1,0 +1,53 @@
+<view class="container">
+	<view class="search-flex {{scrolltop>200?'tophide':''}}">
+		<view class="search-bar">
+			<input type="text" maxlength="12" placeholder="请输入关键字查询" bindinput="inputSearch"></input>
+		</view>
+		<button class="search-extra-btn" bind:tap="submitSearch">查询</button>
+	</view>
+	<view class="filter-flex">
+		<view class="filter-tab">
+			<text bindtap="query1" data-findex="1" class="{{showfilterindex==1?'active':''}}">序号</text>
+			<text bindtap="query2" data-findex="2" class="{{showfilterindex==2?'active':''}}">开始时间</text>
+		</view>
+		<view class="filter-content" wx:if="{{showfilter}}">
+			<view class="filter-panel" wx:if="{{showfilterindex==1}}">
+				<view class="filter-panel-left">
+					<view wx:for="{{filterdata.sort}}" wx:key="{{item.id}}" bindtap="setSortIndex" data-sortindex="{{index}}" data-sortid="{{item.id}}" class="{{sortindex==index?'active':''}}">{{item.title}}</view>
+				</view>
+				<view class="filter-panel-right">
+					<view wx:for="{{filterdata.sort[sortindex].subsort}}" wx:key="{{item.id}}" bindtap="setSubsortIndex" data-subsortindex="{{index}}" data-subsortid="{{item.id}}" class="{{subsortindex==index?'active':''}}">{{item.title}}</view>
+				</view>
+			</view>
+			<view class="filter-panel" wx:if="{{showfilterindex==2}}">
+				<view class="filter-panel-left">
+					<view wx:for="{{filterdata.city}}" wx:key="{{item.id}}" bindtap="setCityIndex" data-cityindex="{{index}}" data-cityid="{{item.id}}" class="{{cityindex==index?'active':''}}">{{item.title}}</view>
+				</view>
+				<view class="filter-panel-right">
+					<view wx:for="{{filterdata.city[cityindex].subcity}}" wx:key="{{item.id}}" bindtap="setSubcityIndex" data-subcityindex="{{index}}" data-subcityid="{{item.id}}" class="{{subcityindex==index?'active':''}}">{{item.title}}</view>
+				</view>
+			</view>
+		</view>
+		<view class="filter-shadow" wx:if="{{showfilter}}" bindtap="hideFilter"></view>
+	</view>
+	<scroll-view class="container-body" scroll-y="true" scroll-top="{{scrolltop}}" bindscroll="scrollHandle" lower-threshold="50" bindscrolltolower="scrollLoading">
+		<view class="service-list">
+			<navigator class="service-item" wx:for="{{devicelist}}" wx:key="{{item.id}}">
+				<view class="service-text">
+					<view class="service-tite">{{item.title}}</view>
+          <view class="service-tite">{{item.content}}</view>
+					<text class="service-city">截至时间：{{item.limit_time}}</text>
+          
+				</view>
+        <view class="service-tags">
+						<text bindtap="onDeleteRecord" data-itemId="{{item.id}}">删除</text>
+            <text bindtap="onModifyRecord" data-itemId="{{item.id}}">修改</text>
+				</view>
+			</navigator>
+		</view>
+		<view class="gototop {{scrolltop>200?'active':''}}" bindtap="goToTop"></view>
+	</scroll-view>
+  <view class="btn-submit">
+    <button class="btn-block btn-orange" bind:tap="onAddReocrd">添加</button>
+  </view>
+</view>
